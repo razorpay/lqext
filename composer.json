@@ -1,5 +1,5 @@
 {
-    "name": "jitendra/lqext",
+    "name": "razorpay/lqext",
     "description": "Laravel queue enhancements, failure handling & retries.",
     "type": "library",
     "require": {
