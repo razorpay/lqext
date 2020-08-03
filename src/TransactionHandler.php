@@ -84,7 +84,7 @@ class TransactionHandler
             ];
         }
 
-        $this->logger->debug('Pending handler pushed', $debugData);
+        $this->debug('Pending handler pushed', $debugData);
     }
 
     /**
@@ -145,7 +145,7 @@ class TransactionHandler
     {
         if (env('APP_ENV') === 'testing' &&
             $this->testingTxnSkipCount < $this->config['transaction']['testing_txn_skip_count']) {
-            $this->logger->debug('Testing transaction skipped');
+            $this->debug('Testing transaction skipped');
             $this->testingTxnSkipCount++;
             return;
         }
@@ -160,7 +160,7 @@ class TransactionHandler
             ];
         }
 
-        $this->logger->debug('New transaction begins', $debugData);
+        $this->debug('New transaction begins', $debugData);
     }
 
     protected function transactionCommitted(Connection $connection)
@@ -191,15 +191,15 @@ class TransactionHandler
                 $debugData['pending_handlers_new_level'] = count($this->pendingHandlers[$level]);
             }
 
-            $this->logger->debug('Pending handlers moved to wrapping transaction on same connection', $debugData);
+            $this->debug('Pending handlers moved to wrapping transaction on same connection', $debugData);
         } else {
             foreach ($pendingHandlers as $handler) {
                 $handler();
-                $this->logger->debug('Pending handler executed', $debugData);
+                $this->debug('Pending handler executed', $debugData);
             }
         }
 
-        $this->logger->debug('Transaction committed', $debugData);
+        $this->debug('Transaction committed', $debugData);
     }
 
     protected function transactionRolledBack(Connection $connection)
@@ -216,7 +216,7 @@ class TransactionHandler
         unset($this->pendingHandlers[count($this->transactions)]);
         array_shift($this->transactions);
 
-        $this->logger->debug('Transaction rolled back', $debugData);
+        $this->debug('Transaction rolled back', $debugData);
     }
 
     protected function getLimitedStackTrace()
@@ -236,8 +236,15 @@ class TransactionHandler
         return $traceData;
     }
 
-    protected function isDebugMode()
+    protected function isDebugMode(): bool
     {
         return $this->config['transaction']['debug'] === true;
+    }
+
+    protected function debug(string $message, array $extra)
+    {
+        if ($this->isDebugMode()) {
+            $this->logger->debug($message, $extra);
+        }
     }
 }
