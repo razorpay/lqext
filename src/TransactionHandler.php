@@ -241,7 +241,7 @@ class TransactionHandler
         return $this->config['transaction']['debug'] === true;
     }
 
-    protected function debug(string $message, array $extra)
+    protected function debug(string $message, array $extra = [])
     {
         if ($this->isDebugMode()) {
             $this->logger->debug($message, $extra);
