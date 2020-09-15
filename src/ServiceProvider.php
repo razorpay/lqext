@@ -12,15 +12,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config.php', 'lqext');
-        $config = $this->app->config->get('lqext');
-        if ($config['transaction']['enable']) {
+        if ($this->app->config->get('lqext.transaction.enable')) {
             $this->app->singleton(
                 TransactionHandler::class,
-                function () use ($config) {
+                function () {
                     return new TransactionHandler(
                         $this->app->events,
                         $this->app->log,
-                        $config
+                        $this->app->config
                     );
                 }
             );
@@ -58,6 +57,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         /**
          * @see readme.md
          */
+        // $config = $this->app->config->get('lqext');
         // if ($config['queue']['enable']) {
         //     $this->app->extend(
         //         'queue',

@@ -9,6 +9,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Database\Events\TransactionCommitted;
 use Illuminate\Database\Events\TransactionRolledBack;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class TransactionHandler
 {
@@ -18,7 +19,7 @@ class TransactionHandler
     protected $logger;
 
     /**
-     * @var array
+     * @var ConfigRepository
      */
     protected $config;
 
@@ -43,7 +44,7 @@ class TransactionHandler
     public function __construct(
         Dispatcher $dispatcher,
         LoggerInterface $logger,
-        array $config
+        ConfigRepository $config
     ) {
         $this->setTransactionListeners($dispatcher);
         $this->logger = $logger;
@@ -100,7 +101,7 @@ class TransactionHandler
                 in_array(TransactionAware::class, class_uses_recursive($object));
             $isWhitelisted = in_array(
                 is_object($object) ? get_class($object) : $object,
-                $this->config['transaction']['whitelist']
+                $this->config->get('lqext.transaction.whitelist')
             );
             return ! $isTransactionAware && ! $isWhitelisted;
         } else {
@@ -144,7 +145,7 @@ class TransactionHandler
     protected function transactionBeginning(Connection $connection)
     {
         if (env('APP_ENV') === 'testing' &&
-            $this->testingTxnSkipCount < $this->config['transaction']['testing_txn_skip_count']) {
+            $this->testingTxnSkipCount < $this->config->get('lqext.transaction.testing_txn_skip_count')) {
             $this->debug('Testing transaction skipped');
             $this->testingTxnSkipCount++;
             return;
@@ -238,7 +239,7 @@ class TransactionHandler
 
     protected function isDebugMode(): bool
     {
-        return $this->config['transaction']['debug'] === true;
+        return $this->config->get('lqext.transaction.debug') === true;
     }
 
     protected function debug(string $message, array $extra = [])
