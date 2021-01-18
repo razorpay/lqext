@@ -34,4 +34,28 @@ class BusDispatcher extends Decorated implements Dispatcher
     {
         return $this->instance->pipeThrough($pipes);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasCommandHandler($command)
+    {
+        return $this->instance->hasCommandHandler($command);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCommandHandler($command)
+    {
+        return $this->instance->getCommandHandler($command);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function map(array $map)
+    {
+        return $this->instance->map(map);
+    }
 }
