@@ -31,7 +31,7 @@ class EventsDispatcher extends Decorated implements Dispatcher
     /**
      * {@inheritDoc}
      */
-    public function listen($events, $listener)
+    public function listen($events, $listener = null)
     {
         return $this->instance->listen($events, $listener);
     }
