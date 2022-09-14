@@ -56,6 +56,11 @@ class BusDispatcher extends Decorated implements Dispatcher
      */
     public function map(array $map)
     {
-        return $this->instance->map(map);
+        return $this->instance->map($map);
+    }
+
+    public function dispatchSync($command, $handler = null)
+    {
+        // TODO: Implement dispatchSync() method.
     }
 }
