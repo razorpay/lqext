@@ -61,6 +61,6 @@ class BusDispatcher extends Decorated implements Dispatcher
 
     public function dispatchSync($command, $handler = null)
     {
-        // TODO: Implement dispatchSync() method.
+        return $this->instance->dispatchSync($command, $handler);
     }
 }
