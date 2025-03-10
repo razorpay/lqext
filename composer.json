@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": "^8.2",
-        "illuminate/support": "11.x-dev",
+        "illuminate/support": "11.44.1",
         "illuminate/events": "11.x-dev",
         "illuminate/contracts": "11.x-dev",
         "illuminate/bus": "11.x-dev",
