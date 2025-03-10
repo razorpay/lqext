@@ -9,7 +9,7 @@
         "illuminate/contracts": "12.x-dev",
         "illuminate/bus": "12.x-dev",
         "illuminate/mail": "12.x-dev",
-        "illuminate/database": "12.x-dev"
+        "illuminate/database": "11.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5.35",
