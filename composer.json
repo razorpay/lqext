@@ -4,11 +4,11 @@
     "type": "library",
     "require": {
         "php": "^8.2",
-        "illuminate/support": "12.x-dev",
-        "illuminate/events": "12.x-dev",
-        "illuminate/contracts": "12.x-dev",
-        "illuminate/bus": "12.x-dev",
-        "illuminate/mail": "12.x-dev",
+        "illuminate/support": "11.x-dev",
+        "illuminate/events": "11.x-dev",
+        "illuminate/contracts": "11.x-dev",
+        "illuminate/bus": "11.x-dev",
+        "illuminate/mail": "11.x-dev",
         "illuminate/database": "11.x-dev"
     },
     "require-dev": {
