@@ -5,11 +5,11 @@
     "require": {
         "php": "^8.2",
         "illuminate/support": "11.44.1",
-        "illuminate/events": "11.x-dev",
-        "illuminate/contracts": "11.x-dev",
-        "illuminate/bus": "11.x-dev",
-        "illuminate/mail": "11.x-dev",
-        "illuminate/database": "11.x-dev"
+        "illuminate/events": "11.44.1",
+        "illuminate/contracts": "11.44.1",
+        "illuminate/bus": "11.44.1",
+        "illuminate/mail": "11.44.1",
+        "illuminate/database": "11.44.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5.35",
